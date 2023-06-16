@@ -1,6 +1,6 @@
 package intelligent_store.userservice.authentication;
 
-import intelligent_store.userservice.authentication.constant.JwtConstant;
+import intelligent_store.userservice.jwt.constant.JwtConstant;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
