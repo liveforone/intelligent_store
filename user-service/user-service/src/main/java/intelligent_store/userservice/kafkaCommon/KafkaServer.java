@@ -1,4 +1,4 @@
-package intelligent_store.userservice.kafka;
+package intelligent_store.userservice.kafkaCommon;
 
 public final class KafkaServer {
 
