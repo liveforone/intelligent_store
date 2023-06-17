@@ -1,4 +1,4 @@
-package intelligent_store.userservice.kafka;
+package intelligent_store.userservice.producer;
 
 public final class ProducerTopic {
 
