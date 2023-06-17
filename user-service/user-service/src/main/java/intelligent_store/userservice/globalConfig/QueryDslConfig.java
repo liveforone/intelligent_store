@@ -1,4 +1,4 @@
-package intelligent_store.userservice.config;
+package intelligent_store.userservice.globalConfig;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;

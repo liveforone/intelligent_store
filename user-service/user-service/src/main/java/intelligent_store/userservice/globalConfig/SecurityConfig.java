@@ -1,4 +1,4 @@
-package intelligent_store.userservice.config;
+package intelligent_store.userservice.globalConfig;
 
 import intelligent_store.userservice.controller.constant.MemberUrl;
 import intelligent_store.userservice.jwt.JwtAuthenticationFilter;
