@@ -19,8 +19,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -77,5 +75,11 @@ public class MemberCommandService {
         Member member = memberRepository.findOneByUsername(username)
                 .orElseThrow(() -> new MemberCustomException(ResponseMessage.MEMBER_IS_NULL));
         member.updateAddress(requestDto.getCity(), requestDto.getRoadNum(), requestDto.getDetail());
+    }
+
+    public void withdraw(String username) {
+        Member member = memberRepository.findOneByUsername(username)
+                .orElseThrow(() -> new MemberCustomException(ResponseMessage.MEMBER_IS_NULL));
+        memberRepository.delete(member);
     }
 }
