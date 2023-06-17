@@ -24,4 +24,12 @@ public class MemberProducer {
         kafkaTemplate.send(topic, jsonOrder);
         log.info(KafkaProducerLog.KAFKA_SEND_LOG.getLog() + topic);
     }
+
+    @Async(AsyncConstant.commandAsync)
+    public void createMileage(String username) {
+        String jsonOrder = gson.toJson(username);
+        String topic = ProducerTopic.CREATE_MILEAGE;
+        kafkaTemplate.send(topic, jsonOrder);
+        log.info(KafkaProducerLog.KAFKA_SEND_LOG.getLog() + topic);
+    }
 }
