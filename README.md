@@ -24,5 +24,6 @@
 # 2. 프로젝트 고민점
 
 # 3. 서비스별 문서
+* [회원 서비스](https://github.com/liveforone/intelligent_store/blob/master/Documents/README_USER.md)
 
 # 4. 프로젝트 설계 문서
