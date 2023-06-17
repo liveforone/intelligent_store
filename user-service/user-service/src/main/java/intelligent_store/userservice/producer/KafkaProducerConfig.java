@@ -1,6 +1,6 @@
 package intelligent_store.userservice.producer;
 
-import intelligent_store.userservice.kafka.KafkaServer;
+import intelligent_store.userservice.kafkaCommon.KafkaServer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
