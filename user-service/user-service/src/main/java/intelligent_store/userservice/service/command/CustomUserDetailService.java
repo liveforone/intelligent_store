@@ -1,4 +1,4 @@
-package intelligent_store.userservice.command;
+package intelligent_store.userservice.service.command;
 
 import intelligent_store.userservice.controller.restResponse.ResponseMessage;
 import intelligent_store.userservice.domain.Member;

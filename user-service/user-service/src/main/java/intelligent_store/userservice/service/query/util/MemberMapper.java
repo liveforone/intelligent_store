@@ -1,4 +1,4 @@
-package intelligent_store.userservice.query.util;
+package intelligent_store.userservice.service.query.util;
 
 import intelligent_store.userservice.domain.Member;
 import intelligent_store.userservice.dto.response.MemberResponse;
