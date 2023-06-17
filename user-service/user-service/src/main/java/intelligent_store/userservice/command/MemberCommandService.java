@@ -1,10 +1,18 @@
 package intelligent_store.userservice.command;
 
+import intelligent_store.userservice.controller.restResponse.ResponseMessage;
 import intelligent_store.userservice.domain.Member;
 import intelligent_store.userservice.domain.Role;
+import intelligent_store.userservice.dto.signupAndLogin.MemberLoginRequest;
 import intelligent_store.userservice.dto.signupAndLogin.MemberSignupRequest;
+import intelligent_store.userservice.exception.MemberCustomException;
+import intelligent_store.userservice.jwt.JwtTokenProvider;
+import intelligent_store.userservice.jwt.TokenInfo;
 import intelligent_store.userservice.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +22,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberCommandService {
 
     private final MemberRepository memberRepository;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    public Long createMember(MemberSignupRequest requestDto, Role auth) {
+    public Long signup(MemberSignupRequest requestDto, Role auth) {
         Member member = Member.create(
                 requestDto.getEmail(),
                 requestDto.getBankbookNum(),
@@ -27,5 +37,22 @@ public class MemberCommandService {
                 requestDto.getDetail()
         );
         return memberRepository.save(member).getId();
+    }
+
+    public TokenInfo login(MemberLoginRequest requestDto) {
+        String email = requestDto.getEmail();
+        String password = requestDto.getPassword();
+
+        Member member = memberRepository.findOneByEmail(email)
+                .orElseThrow(() -> new MemberCustomException(ResponseMessage.MEMBER_IS_NULL));
+
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(member.getUsername(), password);
+        Authentication authentication = authenticationManagerBuilder
+                .getObject()
+                .authenticate(authenticationToken);
+
+        return jwtTokenProvider
+                .generateToken(authentication);
     }
 }
