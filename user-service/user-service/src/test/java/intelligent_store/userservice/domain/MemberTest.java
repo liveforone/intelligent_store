@@ -19,11 +19,30 @@ class MemberTest {
         String detail = "101동 101호";
 
         //when
-        Member member = Member.createMember(email, bankbookNum, password, realName, city, roadNum, detail);
+        Member member = Member.create(email, bankbookNum, password, realName, Role.MEMBER, city, roadNum, detail);
 
         //then
         assertThat(member.getAuth())
                 .isEqualTo(Role.MEMBER);
+    }
+
+    @Test
+    void createAdminTest() {
+        //given
+        String email = "admin@intelligentstore.com";
+        String bankbookNum = "1234567898765";
+        String password = "1111";
+        String realName = "admin";
+        String city = "서울";
+        String roadNum = "송파구 잠실동 1234-1";
+        String detail = "101동 101호";
+
+        //when
+        Member member = Member.create(email, bankbookNum, password, realName, Role.MEMBER, city, roadNum, detail);
+
+        //then
+        assertThat(member.getAuth())
+                .isEqualTo(Role.ADMIN);
     }
 
     @Test
@@ -38,7 +57,7 @@ class MemberTest {
         String detail = "102동 102호";
 
         //when
-        Member member = Member.createSeller(email, bankbookNum, password, realName, city, roadNum, detail);
+        Member member = Member.create(email, bankbookNum, password, realName, Role.SELLER, city, roadNum, detail);
 
         //then
         assertThat(member.getAuth())
@@ -55,7 +74,7 @@ class MemberTest {
         String city = "서울";
         String roadNum = "종로2가-2222-4";
         String detail = "201동 102호";
-        Member member = Member.createMember(email, bankbookNum, password, realName, city, roadNum, detail);
+        Member member = Member.create(email, bankbookNum, password, realName, Role.MEMBER, city, roadNum, detail);
 
         //when
         String newEmail = "new_email@gmail.com";
@@ -76,7 +95,7 @@ class MemberTest {
         String city = "서울";
         String roadNum = "종로4가-4234-4";
         String detail = "401동 401호";
-        Member member = Member.createMember(email, bankbookNum, password, realName, city, roadNum, detail);
+        Member member = Member.create(email, bankbookNum, password, realName, Role.MEMBER, city, roadNum, detail);
 
         //when
         String newPassword = "1234";
@@ -97,7 +116,7 @@ class MemberTest {
         String city = "서울";
         String roadNum = "종로1가-1111-1";
         String detail = "101동 101호";
-        Member member = Member.createMember(email, bankbookNum, password, realName, city, roadNum, detail);
+        Member member = Member.create(email, bankbookNum, password, realName, Role.MEMBER, city, roadNum, detail);
 
         //when
         String newCity = "경기도";
