@@ -1,6 +1,7 @@
 package intelligent_store.userservice.controller.command;
 
 import intelligent_store.userservice.authentication.AuthenticationInfo;
+import intelligent_store.userservice.producer.model.MemberProducer;
 import intelligent_store.userservice.service.command.MemberCommandService;
 import intelligent_store.userservice.controller.constant.ControllerLog;
 import intelligent_store.userservice.controller.restResponse.RestResponse;
@@ -30,6 +31,7 @@ import static intelligent_store.userservice.controller.constant.MemberUrl.*;
 public class MemberCommandController {
 
     private final MemberCommandService memberCommandService;
+    private final MemberProducer memberProducer;
     private final AuthenticationInfo authenticationInfo;
     private final ControllerValidator controllerValidator;
 
@@ -124,7 +126,7 @@ public class MemberCommandController {
     public ResponseEntity<?> withdraw(HttpServletRequest request) {
         String username = authenticationInfo.getUsername(request);
         memberCommandService.withdraw(username);
-        //producer
+        memberProducer.removeShop(username);
         log.info(ControllerLog.WITHDRAW_SUCCESS.getValue() + username);
 
         return RestResponse.withdrawSuccess();
