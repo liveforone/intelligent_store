@@ -1,15 +1,14 @@
-package intelligent_store.userservice.kafka;
+package intelligent_store.userservice.consumer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum KafkaLog {
+public enum KafkaConsumerLog {
 
     KAFKA_RECEIVE_LOG("Consumer receive Kafka Message -> "),
-    KAFKA_SEND_LOG("Kafka send Success | Topic : "),
     KAFKA_NULL_LOG("!! Kafka Message is Null !!");
 
-    private final String value;
+    private final String log;
 }
