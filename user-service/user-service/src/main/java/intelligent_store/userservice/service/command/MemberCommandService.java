@@ -28,7 +28,7 @@ public class MemberCommandService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
 
-    public Long signup(MemberSignupRequest requestDto, Role auth) {
+    public String signup(MemberSignupRequest requestDto, Role auth) {
         Member member = Member.create(
                 requestDto.getEmail(),
                 requestDto.getBankbookNum(),
@@ -39,7 +39,7 @@ public class MemberCommandService {
                 requestDto.getRoadNum(),
                 requestDto.getDetail()
         );
-        return memberRepository.save(member).getId();
+        return memberRepository.save(member).getUsername();
     }
 
     public TokenInfo login(MemberLoginRequest requestDto) {
