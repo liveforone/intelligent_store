@@ -18,9 +18,9 @@ public class MemberQueryService {
 
     private final MemberRepository memberRepository;
 
-    public MemberResponse getMemberByEmail(String email) {
+    public MemberResponse getMemberById(Long id) {
         return MemberMapper.entityToDto(
-                memberRepository.findOneByEmail(email)
+                memberRepository.findOneById(id)
                         .orElseThrow(() -> new MemberCustomException(ResponseMessage.MEMBER_IS_NULL))
         );
     }
