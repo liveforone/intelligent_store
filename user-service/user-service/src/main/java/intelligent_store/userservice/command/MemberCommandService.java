@@ -15,13 +15,13 @@ public class MemberCommandService {
 
     private final MemberRepository memberRepository;
 
-    public Long createMember(MemberSignupRequest requestDto) {
+    public Long createMember(MemberSignupRequest requestDto, Role auth) {
         Member member = Member.create(
                 requestDto.getEmail(),
                 requestDto.getBankbookNum(),
                 requestDto.getPassword(),
                 requestDto.getRealName(),
-                Role.MEMBER,
+                auth,
                 requestDto.getCity(),
                 requestDto.getRoadNum(),
                 requestDto.getDetail()
