@@ -1,8 +1,11 @@
 package intelligent_store.userservice.repository;
 
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import intelligent_store.userservice.domain.Member;
 import intelligent_store.userservice.domain.QMember;
+import intelligent_store.userservice.dto.response.AddressResponse;
+import intelligent_store.userservice.dto.response.BankbookResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -34,5 +37,23 @@ public class MemberRepositoryImpl implements MemberCustomRepository {
                 .selectFrom(member)
                 .where(member.username.eq(username))
                 .fetchOne());
+    }
+
+    public BankbookResponse findBankbookNumByUsername(String username) {
+        return queryFactory
+                .select(Projections.constructor(BankbookResponse.class,
+                        member.bankbookNum))
+                .from(member)
+                .where(member.username.eq(username))
+                .fetchOne();
+    }
+
+    public AddressResponse findAddressByUsername(String username) {
+        return queryFactory
+                .select(Projections.constructor(AddressResponse.class,
+                        member.address))
+                .from(member)
+                .where(member.username.eq(username))
+                .fetchOne();
     }
 }
