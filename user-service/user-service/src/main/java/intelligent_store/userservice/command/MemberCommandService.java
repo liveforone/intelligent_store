@@ -4,6 +4,7 @@ import intelligent_store.userservice.controller.restResponse.ResponseMessage;
 import intelligent_store.userservice.domain.Member;
 import intelligent_store.userservice.domain.Role;
 import intelligent_store.userservice.dto.changeInfo.ChangeEmailRequest;
+import intelligent_store.userservice.dto.changeInfo.ChangePasswordRequest;
 import intelligent_store.userservice.dto.signupAndLogin.MemberLoginRequest;
 import intelligent_store.userservice.dto.signupAndLogin.MemberSignupRequest;
 import intelligent_store.userservice.exception.MemberCustomException;
@@ -63,5 +64,11 @@ public class MemberCommandService {
         Member member = memberRepository.findOneByUsername(username)
                 .orElseThrow(() -> new MemberCustomException(ResponseMessage.MEMBER_IS_NULL));
         member.updateEmail(requestDto.getEmail());
+    }
+
+    public void updatePassword(ChangePasswordRequest requestDto, String username) {
+        Member member = memberRepository.findOneByUsername(username)
+                .orElseThrow(() -> new MemberCustomException(ResponseMessage.MEMBER_IS_NULL));
+        member.updatePassword(requestDto.getNewPassword(), requestDto.getOldPassword());
     }
 }
