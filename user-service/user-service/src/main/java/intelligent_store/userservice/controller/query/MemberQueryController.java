@@ -6,7 +6,7 @@ import intelligent_store.userservice.controller.restResponse.RestResponse;
 import intelligent_store.userservice.dto.response.AddressResponse;
 import intelligent_store.userservice.dto.response.BankbookResponse;
 import intelligent_store.userservice.dto.response.MemberResponse;
-import intelligent_store.userservice.query.MemberQueryService;
+import intelligent_store.userservice.service.query.MemberQueryService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

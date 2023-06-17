@@ -1,7 +1,7 @@
 package intelligent_store.userservice.controller.command;
 
 import intelligent_store.userservice.authentication.AuthenticationInfo;
-import intelligent_store.userservice.command.MemberCommandService;
+import intelligent_store.userservice.service.command.MemberCommandService;
 import intelligent_store.userservice.controller.constant.ControllerLog;
 import intelligent_store.userservice.controller.restResponse.RestResponse;
 import intelligent_store.userservice.domain.Role;
