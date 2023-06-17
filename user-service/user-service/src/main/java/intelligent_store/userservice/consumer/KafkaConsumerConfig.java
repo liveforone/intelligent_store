@@ -1,4 +1,4 @@
-package intelligent_store.userservice.config;
+package intelligent_store.userservice.consumer;
 
 import intelligent_store.userservice.kafka.KafkaServer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
