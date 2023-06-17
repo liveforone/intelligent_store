@@ -16,6 +16,7 @@ public enum ResponseMessage {
     LOGIN_SUCCESS(200, "로그인에 성공하였습니다."),
     CHANGE_EMAIL_SUCCESS(200, "이메일이 변경되었습니다."),
     CHANGE_PASSWORD_SUCCESS(200, "비밀번호가 변경되었습니다."),
+    CHANGE_ADDRESS_SUCCESS(200, "주소가 성공적으로 변경되었습니다."),
     WITHDRAW_SUCCESS(200, "그동안 서비스를 이용해주셔서 감사합니다."),
 
     //==fail==//
