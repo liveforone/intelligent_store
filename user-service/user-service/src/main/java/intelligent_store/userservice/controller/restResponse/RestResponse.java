@@ -35,6 +35,10 @@ public class RestResponse {
         return ResponseEntity.ok(ResponseMessage.CHANGE_PASSWORD_SUCCESS.getValue());
     }
 
+    public static ResponseEntity<?> changeAddressSuccess() {
+        return ResponseEntity.ok(ResponseMessage.CHANGE_ADDRESS_SUCCESS.getValue());
+    }
+
     public static ResponseEntity<?> withdrawSuccess() {
         return ResponseEntity.ok(ResponseMessage.WITHDRAW_SUCCESS.getValue());
     }
