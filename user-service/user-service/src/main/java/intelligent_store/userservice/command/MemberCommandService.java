@@ -3,6 +3,7 @@ package intelligent_store.userservice.command;
 import intelligent_store.userservice.controller.restResponse.ResponseMessage;
 import intelligent_store.userservice.domain.Member;
 import intelligent_store.userservice.domain.Role;
+import intelligent_store.userservice.dto.changeInfo.ChangeEmailRequest;
 import intelligent_store.userservice.dto.signupAndLogin.MemberLoginRequest;
 import intelligent_store.userservice.dto.signupAndLogin.MemberSignupRequest;
 import intelligent_store.userservice.exception.MemberCustomException;
@@ -15,6 +16,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -54,5 +57,11 @@ public class MemberCommandService {
 
         return jwtTokenProvider
                 .generateToken(authentication);
+    }
+
+    public void updateEmail(ChangeEmailRequest requestDto, String username) {
+        Member member = memberRepository.findOneByUsername(username)
+                .orElseThrow(() -> new MemberCustomException(ResponseMessage.MEMBER_IS_NULL));
+        member.updateEmail(requestDto.getEmail());
     }
 }
