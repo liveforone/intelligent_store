@@ -42,7 +42,8 @@ public class MemberCommandController {
     ) {
         controllerValidator.validateBinding(bindingResult);
 
-        memberCommandService.signup(requestDto, Role.MEMBER);
+        String username = memberCommandService.signup(requestDto, Role.MEMBER);
+        memberProducer.createMileage(username);
         log.info(ControllerLog.SIGNUP_SUCCESS.getValue());
 
         return RestResponse.signupSuccess();
