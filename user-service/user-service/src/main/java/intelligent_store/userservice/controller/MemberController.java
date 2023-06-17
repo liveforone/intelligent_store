@@ -6,6 +6,7 @@ import intelligent_store.userservice.controller.constant.ControllerLog;
 import intelligent_store.userservice.controller.restResponse.RestResponse;
 import intelligent_store.userservice.domain.Role;
 import intelligent_store.userservice.dto.changeInfo.ChangeEmailRequest;
+import intelligent_store.userservice.dto.changeInfo.ChangePasswordRequest;
 import intelligent_store.userservice.dto.response.MemberResponse;
 import intelligent_store.userservice.dto.signupAndLogin.MemberLoginRequest;
 import intelligent_store.userservice.dto.signupAndLogin.MemberSignupRequest;
@@ -99,6 +100,21 @@ public class MemberController {
         log.info(ControllerLog.CHANGE_EMAIL_SUCCESS.getValue() + username);
 
         return RestResponse.changeEmailSuccess();
+    }
+
+    @PutMapping(CHANGE_PASSWORD)
+    public ResponseEntity<?> changePassword(
+            @RequestBody @Valid ChangePasswordRequest requestDto,
+            BindingResult bindingResult,
+            HttpServletRequest request
+    ) {
+        controllerValidator.validateBinding(bindingResult);
+
+        String username = authenticationInfo.getUsername(request);
+        memberCommandService.updatePassword(requestDto, username);
+        log.info(ControllerLog.CHANGE_PASSWORD_SUCCESS.getValue() + username);
+
+        return RestResponse.changePasswordSuccess();
     }
 
 
