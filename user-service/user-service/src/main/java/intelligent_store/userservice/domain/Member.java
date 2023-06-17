@@ -60,7 +60,7 @@ public class Member implements UserDetails {
         this.address = address;
     }
 
-    public static Member createMember(String email, String bankbookNum, String password, String realName, String city, String roadNum, String detail) {
+    public static Member create(String email, String bankbookNum, String password, String realName, Role auth,  String city, String roadNum, String detail) {
         final String ADMIN = "admin@intelligentstore.com";
 
         return new Member(
@@ -69,19 +69,7 @@ public class Member implements UserDetails {
                 bankbookNum,
                 PasswordUtils.encodePassword(password),
                 realName,
-                ADMIN.equals(email) ? Role.ADMIN : Role.MEMBER,
-                new Address(city, roadNum, detail)
-        );
-    }
-
-    public static Member createSeller(String email, String bankbookNum, String password, String realName, String city, String roadNum, String detail) {
-        return new Member(
-                createUsername(),
-                email,
-                bankbookNum,
-                PasswordUtils.encodePassword(password),
-                realName,
-                Role.SELLER,
+                ADMIN.equals(email) ? Role.ADMIN : auth,
                 new Address(city, roadNum, detail)
         );
     }
