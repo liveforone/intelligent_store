@@ -13,7 +13,6 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -61,7 +60,7 @@ public class Member implements UserDetails {
         this.address = address;
     }
 
-    public static Member createMember(String email, String bankbookNum, String password, String realName, String city, String detail, String roadNum) {
+    public static Member createMember(String email, String bankbookNum, String password, String realName, String city, String roadNum, String detail) {
         final String ADMIN = "admin@intelligentstore.com";
 
         return new Member(
@@ -71,11 +70,11 @@ public class Member implements UserDetails {
                 PasswordUtils.encodePassword(password),
                 realName,
                 ADMIN.equals(email) ? Role.ADMIN : Role.MEMBER,
-                new Address(city, detail, roadNum)
+                new Address(city, roadNum, detail)
         );
     }
 
-    public static Member createSeller(String email, String bankbookNum, String password, String realName, String city, String detail, String roadNum) {
+    public static Member createSeller(String email, String bankbookNum, String password, String realName, String city, String roadNum, String detail) {
         return new Member(
                 createUsername(),
                 email,
@@ -83,7 +82,7 @@ public class Member implements UserDetails {
                 PasswordUtils.encodePassword(password),
                 realName,
                 Role.SELLER,
-                new Address(city, detail, roadNum)
+                new Address(city, roadNum, detail)
         );
     }
 
@@ -103,8 +102,8 @@ public class Member implements UserDetails {
         this.password = PasswordUtils.encodePassword(newPassword);
     }
 
-    public void updateAddress(String city, String detail, String roadNum) {
-        this.address = new Address(city, detail, roadNum);
+    public void updateAddress(String city, String roadNum, String detail) {
+        this.address = new Address(city, roadNum, detail);
     }
 
     @Override

@@ -16,8 +16,8 @@ public class Address {
     private String city;
 
     @Column(nullable = false)
-    private String detail;
+    private String roadNum;
 
     @Column(nullable = false)
-    private String roadNum;
+    private String detail;
 }
