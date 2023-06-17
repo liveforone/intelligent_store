@@ -18,13 +18,6 @@ public class MemberQueryService {
 
     private final MemberRepository memberRepository;
 
-    public MemberResponse getMemberById(Long id) {
-        return MemberMapper.entityToDto(
-                memberRepository.findOneById(id)
-                        .orElseThrow(() -> new MemberCustomException(ResponseMessage.MEMBER_IS_NULL))
-        );
-    }
-
     public MemberResponse getMemberByUsername(String username) {
         return MemberMapper.entityToDto(
                 memberRepository.findOneByUsername(username)
