@@ -1,9 +1,12 @@
 package intelligent_store.userservice.controller;
 
+import intelligent_store.userservice.authentication.AuthenticationInfo;
 import intelligent_store.userservice.command.MemberCommandService;
 import intelligent_store.userservice.controller.constant.ControllerLog;
 import intelligent_store.userservice.controller.restResponse.RestResponse;
 import intelligent_store.userservice.domain.Role;
+import intelligent_store.userservice.dto.changeInfo.ChangeEmailRequest;
+import intelligent_store.userservice.dto.response.MemberResponse;
 import intelligent_store.userservice.dto.signupAndLogin.MemberLoginRequest;
 import intelligent_store.userservice.dto.signupAndLogin.MemberSignupRequest;
 import intelligent_store.userservice.jwt.TokenInfo;
@@ -30,6 +33,7 @@ public class MemberController {
 
     private final MemberQueryService memberQueryService;
     private final MemberCommandService memberCommandService;
+    private final AuthenticationInfo authenticationInfo;
     private final ControllerValidator controllerValidator;
 
     @PostMapping(SIGNUP_MEMBER)
@@ -73,4 +77,29 @@ public class MemberController {
         response.addHeader(JwtConstant.REFRESH_TOKEN, tokenInfo.getRefreshToken());
         return RestResponse.loginSuccess();
     }
+
+    @GetMapping(MY_INFO)
+    public ResponseEntity<?> myInfo(HttpServletRequest request) {
+        String username = authenticationInfo.getUsername(request);
+        MemberResponse member = memberQueryService.getMemberByUsername(username);
+
+        return ResponseEntity.ok(member);
+    }
+
+    @PutMapping(CHANGE_EMAIL)
+    public ResponseEntity<?> changeEmail(
+            @RequestBody @Valid ChangeEmailRequest requestDto,
+            BindingResult bindingResult,
+            HttpServletRequest request
+    ) {
+        controllerValidator.validateBinding(bindingResult);
+
+        String username = authenticationInfo.getUsername(request);
+        memberCommandService.updateEmail(requestDto, username);
+        log.info(ControllerLog.CHANGE_EMAIL_SUCCESS.getValue() + username);
+
+        return RestResponse.changeEmailSuccess();
+    }
+
+
 }
