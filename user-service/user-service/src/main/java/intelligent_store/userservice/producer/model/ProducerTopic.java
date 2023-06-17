@@ -1,4 +1,4 @@
-package intelligent_store.userservice.producer;
+package intelligent_store.userservice.producer.model;
 
 public final class ProducerTopic {
 

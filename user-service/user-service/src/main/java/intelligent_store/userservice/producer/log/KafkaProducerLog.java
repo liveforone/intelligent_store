@@ -1,4 +1,4 @@
-package intelligent_store.userservice.producer;
+package intelligent_store.userservice.producer.log;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

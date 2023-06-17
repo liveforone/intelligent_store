@@ -1,4 +1,4 @@
-package intelligent_store.userservice.producer;
+package intelligent_store.userservice.producer.config;
 
 import intelligent_store.userservice.kafkaCommon.KafkaServer;
 import org.apache.kafka.clients.producer.ProducerConfig;
