@@ -5,6 +5,7 @@ import intelligent_store.userservice.command.MemberCommandService;
 import intelligent_store.userservice.controller.constant.ControllerLog;
 import intelligent_store.userservice.controller.restResponse.RestResponse;
 import intelligent_store.userservice.domain.Role;
+import intelligent_store.userservice.dto.changeInfo.ChangeAddressRequest;
 import intelligent_store.userservice.dto.changeInfo.ChangeEmailRequest;
 import intelligent_store.userservice.dto.changeInfo.ChangePasswordRequest;
 import intelligent_store.userservice.dto.response.MemberResponse;
@@ -115,6 +116,21 @@ public class MemberController {
         log.info(ControllerLog.CHANGE_PASSWORD_SUCCESS.getValue() + username);
 
         return RestResponse.changePasswordSuccess();
+    }
+
+    @PutMapping(CHANGE_ADDRESS)
+    public ResponseEntity<?> changeAddress(
+            @RequestBody @Valid ChangeAddressRequest requestDto,
+            BindingResult bindingResult,
+            HttpServletRequest request
+    ) {
+        controllerValidator.validateBinding(bindingResult);
+
+        String username = authenticationInfo.getUsername(request);
+        memberCommandService.updateAddress(requestDto, username);
+        log.info(ControllerLog.CHANGE_ADDRESS_SUCCESS.getValue() + username);
+
+        return RestResponse.changeAddressSuccess();
     }
 
 
