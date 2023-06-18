@@ -39,6 +39,7 @@
 ```
 
 ## Json body 예시
+### 내부 API
 ```
 [일반 유저]
 {
@@ -80,8 +81,29 @@
   "detail": "707동 707호"
 }
 ```
+### 내부 API
+```
+[Address Response]
+{
+  "city": "",
+  "roadNum": "",
+  "detail": ""
+}
+
+[Bankbook Response]
+{
+  "bankbookNum": ""
+}
+```
 
 ## 서비스간 통신
+### 회원 탈퇴시 상점 삭제
+* kafka를 사용한다.
+* user-service에서 produce한다.
+```
+request : username
+topic : remove-shop-belong-member
+```
 ### 회원 가입시 마일리지 생성
 * kafka를 사용한다.
 * user-service에서 produce한다.
