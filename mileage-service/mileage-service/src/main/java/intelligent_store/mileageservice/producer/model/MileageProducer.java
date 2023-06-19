@@ -2,7 +2,7 @@ package intelligent_store.mileageservice.producer.model;
 
 import com.google.gson.Gson;
 import intelligent_store.mileageservice.async.AsyncConstant;
-import intelligent_store.mileageservice.dto.MileageFailRollbackOrderRequest;
+import intelligent_store.mileageservice.dto.request.MileageFailRollbackOrderRequest;
 import intelligent_store.mileageservice.producer.log.ProducerLog;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
