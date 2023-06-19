@@ -24,6 +24,11 @@ public class MileageCommandService {
         mileage.accumulate(requestDto.getItemPrice());
     }
 
+    public void useMileage(MileageRequestWhenOrder requestDto) {
+        Mileage mileage = mileageRepository.findOneByUsername(requestDto.getUsername());
+        mileage.useMileage(requestDto.getSpentMileage());
+    }
+
     public void removeMileage(String username) {
         Mileage mileage = mileageRepository.findOneByUsername(username);
         mileageRepository.delete(mileage);

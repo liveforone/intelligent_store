@@ -64,8 +64,8 @@ public class MileageConsumer {
             log.info(ConsumerLog.KAFKA_NULL_LOG.getLog());
         } else {
             try {
-                //차감호출
-                //적립 호출
+                mileageCommandService.useMileage(requestDto);
+                mileageCommandService.accumulateMileage(requestDto);
             } catch (MileageRequestFailException err) {
                 mileageProducer.mileageFailRollbackOrder(MileageMapper.mileageRequestToFailRollbackOrder(requestDto));
             }
