@@ -2,6 +2,7 @@ package intelligent_store.mileageservice.producer.model;
 
 import com.google.gson.Gson;
 import intelligent_store.mileageservice.async.AsyncConstant;
+import intelligent_store.mileageservice.dto.MileageFailRollbackOrderRequest;
 import intelligent_store.mileageservice.producer.log.KafkaProducerLog;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,8 +21,8 @@ public class MileageProducer {
     Gson gson = new Gson();
 
     @Async(AsyncConstant.commandAsync)
-    public void mileageFailRollbackOrder(Long shopId) {
-        String jsonOrder = gson.toJson(shopId);
+    public void mileageFailRollbackOrder(MileageFailRollbackOrderRequest requestDto) {
+        String jsonOrder = gson.toJson(requestDto);
         String topic = MILEAGE_FAIL_ROLLBACK_ORDER;
         kafkaTemplate.send(topic, jsonOrder);
         log.info(KafkaProducerLog.KAFKA_SEND_LOG.getLog() + topic);
