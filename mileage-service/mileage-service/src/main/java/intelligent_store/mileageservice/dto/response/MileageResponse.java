@@ -1,4 +1,4 @@
-package intelligent_store.mileageservice.dto;
+package intelligent_store.mileageservice.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +12,5 @@ import lombok.NoArgsConstructor;
 public class MileageResponse {
 
     private Long id;
-    private String username;
     private long mileagePoint;
 }
