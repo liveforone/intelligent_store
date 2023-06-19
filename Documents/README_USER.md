@@ -97,19 +97,26 @@
 ```
 
 ## 서비스간 통신
-### 회원 탈퇴시 상점 삭제
-* kafka를 사용한다.
-* user-service에서 produce한다.
-```
-request : username
-topic : remove-shop-belong-member
-```
 ### 회원 가입시 마일리지 생성
 * kafka를 사용한다.
 * user-service에서 produce한다.
 ```
 request : username
 topic : create-mileage
+```
+### 회원 탈퇴시 마일리지 삭제
+* kafka를 사용한다.
+* user-service에서 produce한다.
+```
+request : username
+topic : remove-mileage-belong-member
+```
+### 회원 탈퇴시 상점 삭제
+* kafka를 사용한다.
+* user-service에서 produce한다.
+```
+request : username
+topic : remove-shop-belong-member
 ```
 
 ## 셀러의 경우
