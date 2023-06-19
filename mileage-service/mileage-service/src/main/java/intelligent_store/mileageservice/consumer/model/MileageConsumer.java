@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import intelligent_store.mileageservice.consumer.log.ConsumerLog;
 import intelligent_store.mileageservice.dto.request.MileageRequestWhenOrder;
 import intelligent_store.mileageservice.dto.request.OrderFailRollbackMileageRequest;
+import intelligent_store.mileageservice.dto.util.MileageMapper;
 import intelligent_store.mileageservice.exception.MileageRequestFailException;
 import intelligent_store.mileageservice.producer.model.MileageProducer;
 import intelligent_store.mileageservice.utility.CommonUtils;
@@ -65,7 +66,7 @@ public class MileageConsumer {
                 //차감호출
                 //적립 호출
             } catch (MileageRequestFailException err) {
-                mileageProducer.mileageFailRollbackOrder(requestDto.toMileageFailRollbackOrderDto());
+                mileageProducer.mileageFailRollbackOrder(MileageMapper.mileageRequestToFailRollbackOrder(requestDto));
             }
             log.info(ConsumerLog.MILEAGE_REQUEST_WHEN_ORDER_SUCCESS.getLog() + requestDto.getUsername());
         }
