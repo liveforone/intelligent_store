@@ -29,8 +29,8 @@ public class Mileage {
     }
 
     public void accumulate(long itemPrice) {
-        final double ONE_PERCENT = 0.01;
-        this.mileagePoint += itemPrice * ONE_PERCENT;
+        final double ACCUMULATE_PERCENT = 0.01;
+        this.mileagePoint += itemPrice * ACCUMULATE_PERCENT;
     }
 
     public void useMileage(long spentMileage) {
