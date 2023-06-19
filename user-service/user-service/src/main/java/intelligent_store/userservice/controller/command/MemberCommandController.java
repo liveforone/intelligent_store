@@ -127,6 +127,7 @@ public class MemberCommandController {
     public ResponseEntity<?> withdraw(HttpServletRequest request) {
         String username = authenticationInfo.getUsername(request);
         memberCommandService.withdraw(username);
+        memberProducer.removeMileage(username);
         memberProducer.removeShop(username);
         log.info(ControllerLog.WITHDRAW_SUCCESS.getValue() + username);
 
