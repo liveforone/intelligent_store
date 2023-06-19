@@ -5,7 +5,7 @@ import intelligent_store.userservice.dto.response.AddressResponse;
 import intelligent_store.userservice.dto.response.BankbookResponse;
 import intelligent_store.userservice.dto.response.MemberResponse;
 import intelligent_store.userservice.exception.MemberCustomException;
-import intelligent_store.userservice.service.query.util.MemberMapper;
+import intelligent_store.userservice.dto.util.MemberMapper;
 import intelligent_store.userservice.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
