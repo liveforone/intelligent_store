@@ -20,9 +20,9 @@ public class MileageProducer {
     Gson gson = new Gson();
 
     @Async(AsyncConstant.commandAsync)
-    public void useMileageFailRollbackOrder(Long shopId) {
+    public void mileageFailRollbackOrder(Long shopId) {
         String jsonOrder = gson.toJson(shopId);
-        String topic = USE_MILEAGE_FAIL_ROLLBACK_ORDER;
+        String topic = MILEAGE_FAIL_ROLLBACK_ORDER;
         kafkaTemplate.send(topic, jsonOrder);
         log.info(KafkaProducerLog.KAFKA_SEND_LOG.getLog() + topic);
     }

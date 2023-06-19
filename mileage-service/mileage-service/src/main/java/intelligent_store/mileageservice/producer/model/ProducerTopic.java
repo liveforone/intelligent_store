@@ -4,5 +4,5 @@ public final class ProducerTopic {
 
     private ProducerTopic() {}
 
-    public static final String USE_MILEAGE_FAIL_ROLLBACK_ORDER = "use-mileage-fail-rollback-order";
+    public static final String MILEAGE_FAIL_ROLLBACK_ORDER = "mileage-fail-rollback-order";
 }
