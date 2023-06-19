@@ -36,7 +36,7 @@ public class MemberCommandController {
     private final ControllerValidator controllerValidator;
 
     @PostMapping(SIGNUP_MEMBER)
-    public ResponseEntity<?> signupMember(
+    public ResponseEntity<?> signupMemberWithCreateMileage(
             @RequestBody @Valid MemberSignupRequest requestDto,
             BindingResult bindingResult
     ) {
