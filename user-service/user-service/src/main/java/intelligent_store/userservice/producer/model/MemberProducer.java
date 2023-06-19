@@ -18,17 +18,25 @@ public class MemberProducer {
     Gson gson = new Gson();
 
     @Async(AsyncConstant.commandAsync)
-    public void removeShop(String username) {
+    public void createMileage(String username) {
         String jsonOrder = gson.toJson(username);
-        String topic = ProducerTopic.REMOVE_SHOP_BELONG_MEMBER;
+        String topic = ProducerTopic.CREATE_MILEAGE;
         kafkaTemplate.send(topic, jsonOrder);
         log.info(KafkaProducerLog.KAFKA_SEND_LOG.getLog() + topic);
     }
 
     @Async(AsyncConstant.commandAsync)
-    public void createMileage(String username) {
+    public void removeMileage(String username) {
         String jsonOrder = gson.toJson(username);
-        String topic = ProducerTopic.CREATE_MILEAGE;
+        String topic = ProducerTopic.REMOVE_MILEAGE_BELONG_MEMBER;
+        kafkaTemplate.send(topic, jsonOrder);
+        log.info(KafkaProducerLog.KAFKA_SEND_LOG.getLog() + topic);
+    }
+
+    @Async(AsyncConstant.commandAsync)
+    public void removeShop(String username) {
+        String jsonOrder = gson.toJson(username);
+        String topic = ProducerTopic.REMOVE_SHOP_BELONG_MEMBER;
         kafkaTemplate.send(topic, jsonOrder);
         log.info(KafkaProducerLog.KAFKA_SEND_LOG.getLog() + topic);
     }
