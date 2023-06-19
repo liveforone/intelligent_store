@@ -9,4 +9,12 @@ public class MileageRequestWhenOrder {
     private long itemPrice;
     private long spentMileage;
     private String username;
+
+    public MileageFailRollbackOrderRequest toMileageFailRollbackOrderDto() {
+        return MileageFailRollbackOrderRequest.builder()
+                .itemPrice(itemPrice)
+                .spentMileage(spentMileage)
+                .username(username)
+                .build();
+    }
 }
