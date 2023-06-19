@@ -2,7 +2,7 @@ package intelligent_store.mileageservice.consumer.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import intelligent_store.mileageservice.consumer.log.KafkaConsumerLog;
+import intelligent_store.mileageservice.consumer.log.ConsumerLog;
 import intelligent_store.mileageservice.dto.MileageRequestWhenOrder;
 import intelligent_store.mileageservice.dto.OrderFailRollbackMileageRequest;
 import intelligent_store.mileageservice.exception.MileageRequestFailException;
@@ -26,40 +26,40 @@ public class MileageConsumer {
 
     @KafkaListener(topics = CREATE_MILEAGE)
     public void createMileage(String kafkaMessage) throws JsonProcessingException {
-        log.info(KafkaConsumerLog.KAFKA_RECEIVE_LOG.getLog() + kafkaMessage);
+        log.info(ConsumerLog.KAFKA_RECEIVE_LOG.getLog() + kafkaMessage);
 
         String username = objectMapper.readValue(kafkaMessage, String.class);
 
         if (CommonUtils.isNull(username)) {
-            log.info(KafkaConsumerLog.KAFKA_NULL_LOG.getLog());
+            log.info(ConsumerLog.KAFKA_NULL_LOG.getLog());
         } else {
             //create method 호출
-            log.info(KafkaConsumerLog.CREATE_MILEAGE_SUCCESS.getLog() + username);
+            log.info(ConsumerLog.CREATE_MILEAGE_SUCCESS.getLog() + username);
         }
     }
 
     @KafkaListener(topics = REMOVE_MILEAGE_BELONG_MEMBER)
     public void removeMileage(String kafkaMessage) throws JsonProcessingException {
-        log.info(KafkaConsumerLog.KAFKA_RECEIVE_LOG.getLog() + kafkaMessage);
+        log.info(ConsumerLog.KAFKA_RECEIVE_LOG.getLog() + kafkaMessage);
 
         String username = objectMapper.readValue(kafkaMessage, String.class);
 
         if (CommonUtils.isNull(username)) {
-            log.info(KafkaConsumerLog.KAFKA_NULL_LOG.getLog());
+            log.info(ConsumerLog.KAFKA_NULL_LOG.getLog());
         } else {
             //delete method 호출
-            log.info(KafkaConsumerLog.REMOVE_MILEAGE_BELONG_MEMBER_SUCCESS.getLog() + username);
+            log.info(ConsumerLog.REMOVE_MILEAGE_BELONG_MEMBER_SUCCESS.getLog() + username);
         }
     }
 
     @KafkaListener(topics = MILEAGE_REQUEST_WHEN_ORDER)
     public void mileageRequestWhenOrder(String kafkaMessage) throws JsonProcessingException {
-        log.info(KafkaConsumerLog.KAFKA_RECEIVE_LOG.getLog() + kafkaMessage);
+        log.info(ConsumerLog.KAFKA_RECEIVE_LOG.getLog() + kafkaMessage);
 
         MileageRequestWhenOrder requestDto = objectMapper.readValue(kafkaMessage, MileageRequestWhenOrder.class);
 
         if (CommonUtils.isNull(requestDto)) {
-            log.info(KafkaConsumerLog.KAFKA_NULL_LOG.getLog());
+            log.info(ConsumerLog.KAFKA_NULL_LOG.getLog());
         } else {
             try {
                 //차감호출
@@ -67,21 +67,21 @@ public class MileageConsumer {
             } catch (MileageRequestFailException err) {
                 mileageProducer.mileageFailRollbackOrder(requestDto.toMileageFailRollbackOrderDto());
             }
-            log.info(KafkaConsumerLog.MILEAGE_REQUEST_WHEN_ORDER_SUCCESS.getLog() + requestDto.getUsername());
+            log.info(ConsumerLog.MILEAGE_REQUEST_WHEN_ORDER_SUCCESS.getLog() + requestDto.getUsername());
         }
     }
 
     @KafkaListener(topics = ORDER_FAIL_ROLLBACK_MILEAGE)
     public void orderFailRollbackMileage(String kafkaMessage) throws JsonProcessingException {
-        log.info(KafkaConsumerLog.KAFKA_RECEIVE_LOG.getLog() + kafkaMessage);
+        log.info(ConsumerLog.KAFKA_RECEIVE_LOG.getLog() + kafkaMessage);
 
         OrderFailRollbackMileageRequest requestDto = objectMapper.readValue(kafkaMessage, OrderFailRollbackMileageRequest.class);
 
         if (CommonUtils.isNull(requestDto)) {
-            log.info(KafkaConsumerLog.KAFKA_NULL_LOG.getLog());
+            log.info(ConsumerLog.KAFKA_NULL_LOG.getLog());
         } else {
             //롤백처리
-            log.info(KafkaConsumerLog.ORDER_FAIL_ROLLBACK_MILEAGE_SUCCESS.getLog() + requestDto.getUsername());
+            log.info(ConsumerLog.ORDER_FAIL_ROLLBACK_MILEAGE_SUCCESS.getLog() + requestDto.getUsername());
         }
     }
 }
