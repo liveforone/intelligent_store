@@ -13,8 +13,8 @@ public class MileageCommandService {
 
     private final MileageRepository mileageRepository;
 
-    public String createMileage(String username) {
+    public void createMileage(String username) {
         Mileage mileage = Mileage.create(username);
-        return mileageRepository.save(mileage).getUsername();
+        mileageRepository.save(mileage);
     }
 }
