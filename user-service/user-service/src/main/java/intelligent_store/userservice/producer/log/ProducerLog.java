@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum KafkaProducerLog {
+public enum ProducerLog {
 
     KAFKA_SEND_LOG("Kafka send Success | Topic : ");
 

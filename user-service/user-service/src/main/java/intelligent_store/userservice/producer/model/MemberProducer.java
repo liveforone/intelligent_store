@@ -2,7 +2,7 @@ package intelligent_store.userservice.producer.model;
 
 import com.google.gson.Gson;
 import intelligent_store.userservice.async.AsyncConstant;
-import intelligent_store.userservice.producer.log.KafkaProducerLog;
+import intelligent_store.userservice.producer.log.ProducerLog;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -22,7 +22,7 @@ public class MemberProducer {
         String jsonOrder = gson.toJson(username);
         String topic = ProducerTopic.CREATE_MILEAGE;
         kafkaTemplate.send(topic, jsonOrder);
-        log.info(KafkaProducerLog.KAFKA_SEND_LOG.getLog() + topic);
+        log.info(ProducerLog.KAFKA_SEND_LOG.getLog() + topic);
     }
 
     @Async(AsyncConstant.commandAsync)
@@ -30,7 +30,7 @@ public class MemberProducer {
         String jsonOrder = gson.toJson(username);
         String topic = ProducerTopic.REMOVE_MILEAGE_BELONG_MEMBER;
         kafkaTemplate.send(topic, jsonOrder);
-        log.info(KafkaProducerLog.KAFKA_SEND_LOG.getLog() + topic);
+        log.info(ProducerLog.KAFKA_SEND_LOG.getLog() + topic);
     }
 
     @Async(AsyncConstant.commandAsync)
@@ -38,6 +38,6 @@ public class MemberProducer {
         String jsonOrder = gson.toJson(username);
         String topic = ProducerTopic.REMOVE_SHOP_BELONG_MEMBER;
         kafkaTemplate.send(topic, jsonOrder);
-        log.info(KafkaProducerLog.KAFKA_SEND_LOG.getLog() + topic);
+        log.info(ProducerLog.KAFKA_SEND_LOG.getLog() + topic);
     }
 }
