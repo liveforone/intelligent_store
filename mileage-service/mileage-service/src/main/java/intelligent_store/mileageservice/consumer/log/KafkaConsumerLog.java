@@ -13,7 +13,7 @@ KafkaConsumerLog {
     CREATE_MILEAGE_SUCCESS("Create Mileage Success || Username : "),
     MILEAGE_REQUEST_WHEN_ORDER_SUCCESS("Mileage Request when order success || Username : "),
     REMOVE_MILEAGE_BELONG_MEMBER_SUCCESS("Remove Mileage Belong Member Success || Username : "),
-    ORDER_FAIL_ROLLBACK_MILEAGE_SUCCESS("Order Fail Rollback Mileage Success || OrderId : ");
+    ORDER_FAIL_ROLLBACK_MILEAGE_SUCCESS("Order Fail Rollback Mileage Success || Username : ");
 
     private final String log;
 }
