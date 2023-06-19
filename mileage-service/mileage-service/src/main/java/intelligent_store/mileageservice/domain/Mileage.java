@@ -1,5 +1,6 @@
 package intelligent_store.mileageservice.domain;
 
+import intelligent_store.mileageservice.exception.MileageRequestFailException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -34,6 +35,9 @@ public class Mileage {
     }
 
     public void useMileage(long spentMileage) {
+        if (mileagePoint < spentMileage) {
+            throw new MileageRequestFailException();
+        }
         this.mileagePoint -= spentMileage;
     }
 }
