@@ -1,4 +1,4 @@
-package intelligent_store.mileageservice.dto;
+package intelligent_store.mileageservice.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

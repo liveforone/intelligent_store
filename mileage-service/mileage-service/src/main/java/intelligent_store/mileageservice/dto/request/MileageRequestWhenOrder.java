@@ -1,5 +1,6 @@
-package intelligent_store.mileageservice.dto;
+package intelligent_store.mileageservice.dto.request;
 
+import intelligent_store.mileageservice.dto.request.MileageFailRollbackOrderRequest;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
