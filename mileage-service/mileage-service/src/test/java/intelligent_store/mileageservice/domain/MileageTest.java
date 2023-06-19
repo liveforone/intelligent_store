@@ -51,4 +51,22 @@ class MileageTest {
         assertThat(mileage.getMileagePoint())
                 .isEqualTo(100);
     }
+
+    @Test
+    void rollbackMileageTest() {
+        //given
+        String username = "dsjlfsjlfsjdlfjsdlfjdslkfjs";
+        Mileage mileage = Mileage.create(username);
+        long itemPrice = 30000;
+        mileage.accumulate(itemPrice);
+        long spentMileage = 200;
+        mileage.useMileage(spentMileage);
+
+        //when
+        mileage.rollbackMileage(itemPrice, spentMileage);
+
+        //then
+        assertThat(mileage.getMileagePoint())
+                .isEqualTo(0);
+    }
 }
