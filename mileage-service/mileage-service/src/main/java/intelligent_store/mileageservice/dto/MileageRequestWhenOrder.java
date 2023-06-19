@@ -5,7 +5,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class AccumulateMileageRequest {
-    private long orderPrice;
+public class MileageRequestWhenOrder {
+    private long itemPrice;
+    private long spentMileage;
     private String username;
 }
