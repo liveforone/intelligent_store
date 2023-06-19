@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import intelligent_store.mileageservice.consumer.log.KafkaConsumerLog;
 import intelligent_store.mileageservice.dto.MileageRequestWhenOrder;
 import intelligent_store.mileageservice.dto.OrderFailRollbackMileageRequest;
+import intelligent_store.mileageservice.exception.MileageRequestFailException;
+import intelligent_store.mileageservice.producer.model.MileageProducer;
 import intelligent_store.mileageservice.utility.CommonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +21,7 @@ import static intelligent_store.mileageservice.consumer.model.ConsumerTopic.*;
 public class MileageConsumer {
 
     //service 호출
+    private final MileageProducer mileageProducer;
     ObjectMapper objectMapper = new ObjectMapper();
 
     @KafkaListener(topics = CREATE_MILEAGE)
@@ -58,8 +61,12 @@ public class MileageConsumer {
         if (CommonUtils.isNull(requestDto)) {
             log.info(KafkaConsumerLog.KAFKA_NULL_LOG.getLog());
         } else {
-            //차감호출
-            //적립 호출
+            try {
+                //차감호출
+                //적립 호출
+            } catch (MileageRequestFailException err) {
+                mileageProducer.mileageFailRollbackOrder(requestDto.toMileageFailRollbackOrderDto());
+            }
             log.info(KafkaConsumerLog.MILEAGE_REQUEST_WHEN_ORDER_SUCCESS.getLog() + requestDto.getUsername());
         }
     }
