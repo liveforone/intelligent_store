@@ -8,6 +8,7 @@ import intelligent_store.mileageservice.dto.request.OrderFailRollbackMileageRequ
 import intelligent_store.mileageservice.dto.util.MileageMapper;
 import intelligent_store.mileageservice.exception.MileageRequestFailException;
 import intelligent_store.mileageservice.producer.model.MileageProducer;
+import intelligent_store.mileageservice.service.command.MileageCommandService;
 import intelligent_store.mileageservice.utility.CommonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,7 @@ import static intelligent_store.mileageservice.consumer.model.ConsumerTopic.*;
 @Slf4j
 public class MileageConsumer {
 
-    //service 호출
+    private final MileageCommandService mileageCommandService;
     private final MileageProducer mileageProducer;
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -34,7 +35,7 @@ public class MileageConsumer {
         if (CommonUtils.isNull(username)) {
             log.info(ConsumerLog.KAFKA_NULL_LOG.getLog());
         } else {
-            //create method 호출
+            mileageCommandService.createMileage(username);
             log.info(ConsumerLog.CREATE_MILEAGE_SUCCESS.getLog() + username);
         }
     }
