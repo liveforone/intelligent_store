@@ -27,4 +27,13 @@ public class Mileage {
     public static Mileage create(String username) {
         return new Mileage(username);
     }
+
+    public void accumulate(long itemPrice) {
+        final double ONE_PERCENT = 0.01;
+        this.mileagePoint += itemPrice * ONE_PERCENT;
+    }
+
+    public void useMileage(long spentMileage) {
+        this.mileagePoint -= spentMileage;
+    }
 }
