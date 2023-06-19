@@ -49,7 +49,7 @@ public class MileageConsumer {
         if (CommonUtils.isNull(username)) {
             log.info(ConsumerLog.KAFKA_NULL_LOG.getLog());
         } else {
-            //delete method 호출
+            mileageCommandService.removeMileage(username);
             log.info(ConsumerLog.REMOVE_MILEAGE_BELONG_MEMBER_SUCCESS.getLog() + username);
         }
     }

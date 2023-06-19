@@ -17,4 +17,9 @@ public class MileageCommandService {
         Mileage mileage = Mileage.create(username);
         mileageRepository.save(mileage);
     }
+
+    public void removeMileage(String username) {
+        Mileage mileage = mileageRepository.findOneByUsername(username);
+        mileageRepository.delete(mileage);
+    }
 }
