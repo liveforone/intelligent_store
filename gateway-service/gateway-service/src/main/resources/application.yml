@@ -35,29 +35,29 @@ spring:
               args:
                 name: store-user-service
                 fallbackuri: forward:/fallback/user
-#        - id: taxi-service-provide
-#          uri: lb://TAXI-SERVICE
-#          predicates:
-#            - Path=/taxi-service/provide/**
-#          filters:
-#            - RemoveRequestHeader=Cookie
-#            - RewritePath=/taxi-service/(?<segment>.*), /$\{segment}
-#            - name: CircuitBreaker
-#              args:
-#                name: taxi-service
-#                fallbackuri: forward:/fallback/taxi
-#        - id: taxi-service-other
-#          uri: lb://TAXI-SERVICE
-#          predicates:
-#            - Path=/taxi-service/**
-#          filters:
-#            - RemoveRequestHeader=Cookie
-#            - RewritePath=/taxi-service/(?<segment>.*), /$\{segment}
-#            - AuthorizationHeaderFilter
-#            - name: CircuitBreaker
-#              args:
-#                name: taxi-service
-#                fallbackuri: forward:/fallback/taxi
+        - id: mileage-service-provide
+          uri: lb://MILEAGE-SERVICE
+          predicates:
+            - Path=/mileage-service/provide/**
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/mileage-service/(?<segment>.*), /$\{segment}
+            - name: CircuitBreaker
+              args:
+                name: mileage-service
+                fallbackuri: forward:/fallback/mileage
+        - id: mileage-service-other
+          uri: lb://MILEAGE-SERVICE
+          predicates:
+            - Path=/mileage-service/**
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/mileage-service/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter
+            - name: CircuitBreaker
+              args:
+                name: mileage-service
+                fallbackuri: forward:/fallback/mileage
 
 management:
   endpoints:
