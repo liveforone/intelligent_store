@@ -40,4 +40,10 @@ public class Mileage {
         }
         this.mileagePoint -= spentMileage;
     }
+
+    public void rollbackMileage(long itemPrice, long spentMileage) {
+        final double ACCUMULATE_PERCENT = 0.01;
+        this.mileagePoint -= (long) (itemPrice * ACCUMULATE_PERCENT);
+        this.mileagePoint += spentMileage;
+    }
 }
