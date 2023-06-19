@@ -2,6 +2,7 @@ package intelligent_store.mileageservice.service.command;
 
 import intelligent_store.mileageservice.domain.Mileage;
 import intelligent_store.mileageservice.dto.request.MileageRequestWhenOrder;
+import intelligent_store.mileageservice.dto.request.OrderFailRollbackMileageRequest;
 import intelligent_store.mileageservice.exception.MileageRequestFailException;
 import intelligent_store.mileageservice.repository.MileageRepository;
 import intelligent_store.mileageservice.utility.CommonUtils;
@@ -39,6 +40,11 @@ public class MileageCommandService {
         }
 
         mileage.useMileage(requestDto.getSpentMileage());
+    }
+
+    public void rollbackMileage(OrderFailRollbackMileageRequest requestDto) {
+        Mileage mileage = mileageRepository.findOneByUsername(requestDto.getUsername());
+        mileage.rollbackMileage(requestDto.getItemPrice(), requestDto.getSpentMileage());
     }
 
     public void removeMileage(String username) {

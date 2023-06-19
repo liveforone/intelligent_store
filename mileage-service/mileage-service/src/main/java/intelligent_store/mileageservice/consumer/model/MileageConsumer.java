@@ -82,7 +82,7 @@ public class MileageConsumer {
         if (CommonUtils.isNull(requestDto)) {
             log.info(ConsumerLog.KAFKA_NULL_LOG.getLog());
         } else {
-            //롤백처리
+            mileageCommandService.rollbackMileage(requestDto);
             log.info(ConsumerLog.ORDER_FAIL_ROLLBACK_MILEAGE_SUCCESS.getLog() + requestDto.getUsername());
         }
     }
