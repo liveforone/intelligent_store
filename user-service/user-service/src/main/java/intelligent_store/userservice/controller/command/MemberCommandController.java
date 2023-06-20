@@ -1,11 +1,11 @@
 package intelligent_store.userservice.controller.command;
 
 import intelligent_store.userservice.authentication.AuthenticationInfo;
+import intelligent_store.userservice.dto.signupAndLogin.SellerSignupRequest;
 import intelligent_store.userservice.producer.model.MemberProducer;
 import intelligent_store.userservice.service.command.MemberCommandService;
 import intelligent_store.userservice.controller.constant.ControllerLog;
 import intelligent_store.userservice.controller.restResponse.RestResponse;
-import intelligent_store.userservice.domain.Role;
 import intelligent_store.userservice.dto.changeInfo.ChangeAddressRequest;
 import intelligent_store.userservice.dto.changeInfo.ChangeEmailRequest;
 import intelligent_store.userservice.dto.changeInfo.ChangePasswordRequest;
@@ -42,7 +42,7 @@ public class MemberCommandController {
     ) {
         controllerValidator.validateBinding(bindingResult);
 
-        String username = memberCommandService.signup(requestDto, Role.MEMBER);
+        String username = memberCommandService.signupMember(requestDto);
         memberProducer.createMileage(username);
         log.info(ControllerLog.SIGNUP_SUCCESS.getValue());
 
@@ -50,14 +50,14 @@ public class MemberCommandController {
     }
 
     @PostMapping(SIGNUP_SELLER)
-    public ResponseEntity<?> signupSeller(
-            @RequestBody @Valid MemberSignupRequest requestDto,
+    public ResponseEntity<?> signupSellerWithCreateShop(
+            @RequestBody @Valid SellerSignupRequest requestDto,
             BindingResult bindingResult
     ) {
         controllerValidator.validateBinding(bindingResult);
 
-        String username = memberCommandService.signup(requestDto, Role.SELLER);
-        memberProducer.createShop(username);
+        String username = memberCommandService.signupSeller(requestDto);
+        memberProducer.createShop(requestDto, username);
         log.info(ControllerLog.SIGNUP_SUCCESS.getValue());
 
         return RestResponse.signupSuccess();
