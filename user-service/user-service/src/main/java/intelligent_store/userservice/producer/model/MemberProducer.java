@@ -34,6 +34,14 @@ public class MemberProducer {
     }
 
     @Async(AsyncConstant.commandAsync)
+    public void createShop(String username) {
+        String jsonOrder = gson.toJson(username);
+        String topic = ProducerTopic.CREATE_SHOP;
+        kafkaTemplate.send(topic, jsonOrder);
+        log.info(ProducerLog.KAFKA_SEND_LOG.getLog() + topic);
+    }
+
+    @Async(AsyncConstant.commandAsync)
     public void removeShop(String username) {
         String jsonOrder = gson.toJson(username);
         String topic = ProducerTopic.REMOVE_SHOP_BELONG_MEMBER;

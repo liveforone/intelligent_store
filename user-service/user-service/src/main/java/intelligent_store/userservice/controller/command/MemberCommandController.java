@@ -56,7 +56,8 @@ public class MemberCommandController {
     ) {
         controllerValidator.validateBinding(bindingResult);
 
-        memberCommandService.signup(requestDto, Role.SELLER);
+        String username = memberCommandService.signup(requestDto, Role.SELLER);
+        memberProducer.createShop(username);
         log.info(ControllerLog.SIGNUP_SUCCESS.getValue());
 
         return RestResponse.signupSuccess();
