@@ -34,7 +34,7 @@ logging:
   level:
     org.hibernate.SQL: DEBUG
     org.springframework.web: DEBUG
-    #feign: DEBUG
+    intelligent_store.shopservice.feignClient.RecommendClient: DEBUG
 
 feign:
   client:
