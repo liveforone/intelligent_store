@@ -8,6 +8,7 @@ import intelligent_store.userservice.dto.changeInfo.ChangeEmailRequest;
 import intelligent_store.userservice.dto.changeInfo.ChangePasswordRequest;
 import intelligent_store.userservice.dto.signupAndLogin.MemberLoginRequest;
 import intelligent_store.userservice.dto.signupAndLogin.MemberSignupRequest;
+import intelligent_store.userservice.dto.signupAndLogin.SellerSignupRequest;
 import intelligent_store.userservice.exception.MemberCustomException;
 import intelligent_store.userservice.jwt.JwtTokenProvider;
 import intelligent_store.userservice.jwt.TokenInfo;
@@ -28,13 +29,27 @@ public class MemberCommandService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
 
-    public String signup(MemberSignupRequest requestDto, Role auth) {
+    public String signupMember(MemberSignupRequest requestDto) {
         Member member = Member.create(
                 requestDto.getEmail(),
                 requestDto.getBankbookNum(),
                 requestDto.getPassword(),
                 requestDto.getRealName(),
-                auth,
+                Role.MEMBER,
+                requestDto.getCity(),
+                requestDto.getRoadNum(),
+                requestDto.getDetail()
+        );
+        return memberRepository.save(member).getUsername();
+    }
+
+    public String signupSeller(SellerSignupRequest requestDto) {
+        Member member = Member.create(
+                requestDto.getEmail(),
+                requestDto.getBankbookNum(),
+                requestDto.getPassword(),
+                requestDto.getRealName(),
+                Role.SELLER,
                 requestDto.getCity(),
                 requestDto.getRoadNum(),
                 requestDto.getDetail()
