@@ -9,7 +9,7 @@ public enum ConsumerLog {
 
     KAFKA_RECEIVE_LOG("Consumer receive Kafka Message -> "),
     KAFKA_NULL_LOG("!! Kafka Message is Null !!"),
-    CREATE_SHOP_SUCCESS("Create Shop Success || ID : "),
+    CREATE_SHOP_SUCCESS("Create Shop Success || Username : "),
     REMOVE_SHOP_SUCCESS("Remove Shop Success || Username : ");
 
     private final String log;
