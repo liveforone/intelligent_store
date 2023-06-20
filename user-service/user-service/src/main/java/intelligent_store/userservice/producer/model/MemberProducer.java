@@ -2,6 +2,8 @@ package intelligent_store.userservice.producer.model;
 
 import com.google.gson.Gson;
 import intelligent_store.userservice.async.AsyncConstant;
+import intelligent_store.userservice.dto.shop.ShopRequest;
+import intelligent_store.userservice.dto.signupAndLogin.SellerSignupRequest;
 import intelligent_store.userservice.producer.log.ProducerLog;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,8 +36,13 @@ public class MemberProducer {
     }
 
     @Async(AsyncConstant.commandAsync)
-    public void createShop(String username) {
-        String jsonOrder = gson.toJson(username);
+    public void createShop(SellerSignupRequest requestDto, String username) {
+        ShopRequest request = ShopRequest.builder()
+                .shopName(requestDto.getShopName())
+                .tel(requestDto.getTel())
+                .username(username)
+                .build();
+        String jsonOrder = gson.toJson(request);
         String topic = ProducerTopic.CREATE_SHOP;
         kafkaTemplate.send(topic, jsonOrder);
         log.info(ProducerLog.KAFKA_SEND_LOG.getLog() + topic);
