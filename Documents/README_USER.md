@@ -15,7 +15,8 @@
 * 어드민회원은 결제 서비스에 등록되어있는 intelligent store 서비스의 계좌를 변경할 수 있다.
 * 회원은 마이페이지에서 내 정보를 볼 수 있다.
 * 회원은 탈퇴가 가능하다.
-* 회원가입시 마일리지 생성을 요청한다. 다만 일반 회원일 때에만 요청한다.
+* 회원가입시 일반 회원의 경우 마일리지 생성을 요청한다.
+* 회원가입시 셀러 회원의 경우 상점 생성을 요청한다.
 
 ## API 설계
 ### 내부 API
@@ -39,7 +40,7 @@
 ```
 
 ## Json body 예시
-### 내부 API
+### 내부 Body
 ```
 [일반 유저]
 {
@@ -81,7 +82,7 @@
   "detail": "707동 707호"
 }
 ```
-### 내부 API
+### 외부 Body
 ```
 [Address Response]
 {
@@ -110,6 +111,13 @@ topic : create-mileage
 ```
 request : username
 topic : remove-mileage-belong-member
+```
+### 셀러 회원 가입시 상점 생성
+* kafka를 사용한다.
+* user-service에서 produce한다.
+```
+request : username
+topic : create-shop
 ```
 ### 회원 탈퇴시 상점 삭제
 * kafka를 사용한다.
