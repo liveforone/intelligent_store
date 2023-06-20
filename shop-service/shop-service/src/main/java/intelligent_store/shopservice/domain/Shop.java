@@ -29,6 +29,10 @@ public class Shop {
         this.tel = tel;
     }
 
+    public static Shop create(String username, String shopName, String tel) {
+        return new Shop(username, shopName, tel);
+    }
+
     public void updateShopName(String shopName) {
         this.shopName = shopName;
     }
