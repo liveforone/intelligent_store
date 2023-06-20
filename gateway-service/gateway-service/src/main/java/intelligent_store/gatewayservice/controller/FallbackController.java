@@ -36,4 +36,14 @@ public class FallbackController {
     public Mono<String> fallbackMileagePost() {
         return Mono.just(FallbackMessage.MILEAGE_LOG);
     }
+
+    @GetMapping(FallbackUrl.SHOP)
+    public Mono<String> fallbackShopGet() {
+        return Mono.just(FallbackMessage.SHOP_LOG);
+    }
+
+    @PutMapping(FallbackUrl.SHOP)
+    public Mono<String> fallbackShopPut() {
+        return Mono.just(FallbackMessage.SHOP_LOG);
+    }
 }
