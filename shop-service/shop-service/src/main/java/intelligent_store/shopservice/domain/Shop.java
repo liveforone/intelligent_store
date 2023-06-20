@@ -28,4 +28,12 @@ public class Shop {
         this.shopName = shopName;
         this.tel = tel;
     }
+
+    public void updateShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public void updateTel(String tel) {
+        this.tel = tel;
+    }
 }
