@@ -5,6 +5,7 @@ import intelligent_store.userservice.dto.changeInfo.ChangeAddressRequest;
 import intelligent_store.userservice.dto.changeInfo.ChangeEmailRequest;
 import intelligent_store.userservice.dto.changeInfo.ChangePasswordRequest;
 import intelligent_store.userservice.dto.signupAndLogin.MemberSignupRequest;
+import intelligent_store.userservice.dto.signupAndLogin.SellerSignupRequest;
 import intelligent_store.userservice.service.query.MemberQueryService;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
@@ -35,14 +36,14 @@ class MemberCommandServiceTest {
         requestDto.setCity(city);
         requestDto.setRoadNum(roadNum);
         requestDto.setDetail(detail);
-        return memberCommandService.signup(requestDto, Role.MEMBER);
+        return memberCommandService.signupMember(requestDto);
     }
 
     @Test
     @Transactional
-    void signupTest() {
+    void signupMemberTest() {
         //given
-        String email = "create_test@gmail.com";
+        String email = "create_member_test@gmail.com";
         String bankbookNum = "1234567898765";
         String password = "1111";
         String realName = "create_test_member";
@@ -59,13 +60,47 @@ class MemberCommandServiceTest {
         requestDto.setCity(city);
         requestDto.setRoadNum(roadNum);
         requestDto.setDetail(detail);
-        String username = memberCommandService.signup(requestDto, Role.MEMBER);
+        String username = memberCommandService.signupMember(requestDto);
         em.flush();
         em.clear();
 
         //then
-        assertThat(memberQueryService.getMemberByUsername(username).getEmail())
-                .isEqualTo(email);
+        assertThat(memberQueryService.getMemberByUsername(username).getAuth())
+                .isEqualTo(Role.MEMBER);
+    }
+
+    @Test
+    @Transactional
+    void signupSellerTest() {
+        //given
+        String email = "create_seller_test@gmail.com";
+        String bankbookNum = "1234567898765";
+        String password = "1111";
+        String realName = "create_test_seller";
+        String city = "서울";
+        String roadNum = "종로1가-1234-2";
+        String detail = "103동 103호";
+        String shopName = "test_shop";
+        String tel = "01011111111";
+
+        //when
+        SellerSignupRequest requestDto = new SellerSignupRequest();
+        requestDto.setEmail(email);
+        requestDto.setBankbookNum(bankbookNum);
+        requestDto.setPassword(password);
+        requestDto.setRealName(realName);
+        requestDto.setCity(city);
+        requestDto.setRoadNum(roadNum);
+        requestDto.setDetail(detail);
+        requestDto.setShopName(shopName);
+        requestDto.setTel(tel);
+        String username = memberCommandService.signupSeller(requestDto);
+        em.flush();
+        em.clear();
+
+        //then
+        assertThat(memberQueryService.getMemberByUsername(username).getAuth())
+                .isEqualTo(Role.SELLER);
     }
 
     @Test
